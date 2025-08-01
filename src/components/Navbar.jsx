@@ -15,6 +15,9 @@ const Navbar = () => {
         <Link to="/colleges" className="hover:text-blue-600 flex items-center gap-1">
           <FontAwesomeIcon icon={faUniversity} /> Colleges
         </Link>
+        <Link to="/university-register" className="hover:text-blue-600 flex items-center gap-1">
+          <FontAwesomeIcon icon={faUniversity} /> University Registration
+        </Link>
         <Link to="/exams" className="hover:text-blue-600 flex items-center gap-1">
           <FontAwesomeIcon icon={faBookOpen} /> Exams
         </Link>
