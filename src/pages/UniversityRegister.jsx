@@ -171,67 +171,38 @@ const UniversityRegister = () => {
   };
 
   // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formErrors = validateForm();
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const formErrors = validateForm();
 
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-      return;
-    }
+  if (Object.keys(formErrors).length > 0) {
+    setErrors(formErrors);
+    return;
+  }
 
-    setIsSubmitting(true);
-    try {
-      const submissionData = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (key === 'contacts') {
-          submissionData.append('contacts', JSON.stringify(formData.contacts));
-        } else if (key === 'images' || key === 'videos') {
-          formData[key].forEach((file) => submissionData.append(key, file));
-        } else if (formData[key] !== null) {
-          submissionData.append(key, formData[key]);
-        }
-      });
+  setIsSubmitting(true);
+  try {
+    const newUniversity = {
+      name: formData.name,
+      state: formData.state,
+      city: formData.city,
+      logo: formData.logo ? URL.createObjectURL(formData.logo) : '', // convert image to preview URL
+      streams: formData.streams,
+    };
 
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulated API call
-      console.log('University Registered:', Object.fromEntries(submissionData));
-      alert('University registration submitted successfully!');
+    // Save to localStorage
+    const existingUniversities = JSON.parse(localStorage.getItem('universities')) || [];
+    existingUniversities.push(newUniversity);
+    localStorage.setItem('universities', JSON.stringify(existingUniversities));
 
-      // Reset form after submission
-      setFormData({
-        name: '',
-        type: '',
-        affiliation: '',
-        established: '',
-        website: '',
-        address: '',
-        city: '',
-        state: '',
-        pincode: '',
-        contacts: [{ type: 'registrar', name: '', email: '', phone: '', countryCode: '+91' }],
-        coursesFile: null,
-        streams: '',
-        students: '',
-        faculty: '',
-        hostel: '',
-        campusArea: '',
-        about: '',
-        logo: null,
-        brochure: null,
-        images: [],
-        videos: [],
-        adminEmail: '',
-        password: '',
-        confirmPassword: '',
-      });
-      setImagePreviews([]);
-      setVideoPreviews([]);
-    } catch (error) {
-      alert('Error submitting registration. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    alert('University registered successfully!');
+    // Reset the form...
+  } catch (error) {
+    alert('Error submitting registration.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   // Form sections configuration
   const formSections = [
