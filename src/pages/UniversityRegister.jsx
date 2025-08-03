@@ -12,7 +12,8 @@ import {
   faSpinner,
   faUpload,
   faTimes,
-} from '@fortawesome/free-solid-svg-icons'; // Icons for form sections
+  faBriefcase,
+} from '@fortawesome/free-solid-svg-icons'; // Added faBriefcase
 
 const UniversityRegister = () => {
   // State to store form data (all input fields)
@@ -41,6 +42,10 @@ const UniversityRegister = () => {
     adminEmail: '',
     password: '',
     confirmPassword: '',
+    topRecruiters: '',
+    averagePackage: '',
+    highestPackage: '',
+    placementEmail: '',
   });
 
   // State for form errors and submission status
@@ -89,6 +94,9 @@ const UniversityRegister = () => {
         newErrors[`contactEmail${index}`] = 'Invalid email format';
       }
     });
+    if (formData.placementEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.placementEmail)) {
+      newErrors.placementEmail = 'Invalid placement email format';
+    }
     if (formData.logo && !['image/png', 'image/jpeg', 'image/jpg'].includes(formData.logo.type)) {
       newErrors.logo = 'Logo must be a PNG or JPEG image';
     }
@@ -223,6 +231,10 @@ const UniversityRegister = () => {
         adminEmail: '',
         password: '',
         confirmPassword: '',
+        topRecruiters: '',
+        averagePackage: '',
+        highestPackage: '',
+        placementEmail: '',
       });
       setImagePreviews([]);
       setVideoPreviews([]);
@@ -292,13 +304,11 @@ const UniversityRegister = () => {
       title: 'Academic Details',
       icon: faBook,
       fields: [
-
         { label: 'Popular Streams', name: 'streams', placeholder: 'e.g., Engineering, Arts' },
         { label: 'Total Students', name: 'students', type: 'number', placeholder: 'Enter number of students' },
         { label: 'Total Faculty', name: 'faculty', type: 'number', placeholder: 'Enter number of faculty' },
         { label: 'Hostel Available', name: 'hostel', placeholder: 'Yes / No' },
         { label: 'Campus Area (in acres)', name: 'campusArea', type: 'number', placeholder: 'Enter area in acres' },
-
         {
           label: 'Courses Excel File',
           name: 'coursesFile',
@@ -306,13 +316,23 @@ const UniversityRegister = () => {
           placeholder: 'Upload courses (Excel)',
           accept: '.xls,.xlsx'
         },
-                {
+        {
           label: 'Download e.g. Excel Sheet',
           name: 'sampleExcel',
           type: 'download',
           href: '/sample-courses.xlsx',
           text: 'e.g. Excel Sheet'
         },
+      ],
+    },
+    {
+      title: 'Placement & Recruiter Info',
+      icon: faBriefcase,
+      fields: [
+        { label: 'Top Recruiters', name: 'topRecruiters', placeholder: 'e.g., TCS, Wipro, Google', type: 'text' },
+        { label: 'Average Package (LPA)', name: 'averagePackage', type: 'number', placeholder: 'e.g., 4.5' },
+        { label: 'Highest Package (LPA)', name: 'highestPackage', type: 'number', placeholder: 'e.g., 24.0' },
+        { label: 'Placement Cell Contact Email', name: 'placementEmail', type: 'email', placeholder: 'placement@university.edu' },
       ],
     },
     {
@@ -398,57 +418,54 @@ const UniversityRegister = () => {
               <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-15 gap-y-8">
                 {section.title === 'Contact Information' ? (
                   <>
-
-                  {/* ALTERNATE CONTACT  */}
-{section.fields.map((field, idx) => (
-  <div key={field.name} className="space-y-1">
-    {field.name === 'altContact' ? (
-      <div>
-        <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-700">
-          {field.label}
-        </label>
-        <div className="flex">
-          <select
-            name="countryCode"
-            value={formData.altContact?.countryCode || '+91'}
-            onChange={(e) => handleAltContactChange(e)}
-            className="w-2/3 sm:w-1/4 py-2 text-sm border border-gray-500 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#3656E5] focus:border-[#3656E5]"
-          >
-            {countryCodes.map((code) => (
-              <option key={code} value={code}>
-                {code}
-              </option>
-            ))}
-          </select>
-          <input
-            type="text"
-            name="phone"
-            value={formData.altContact?.phone || ''}
-            onChange={(e) => handleAltContactChange(e)}
-            placeholder={field.placeholder}
-            className="w-2/3 sm:w-3/4 px-3 py-2 text-sm border border-l-0 border-gray-500 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#3656E5] focus:border-[#3656E5]"
-          />
-        </div>
-        {errors.altContact && (
-          <p className="text-xs text-red-600 mt-1">{errors.altContact}</p>
-        )}
-      </div>
-    ) : (
-      <FormInput
-        label={field.label}
-        name={field.name}
-        value={formData[field.name] || ''}
-        onChange={handleChange}
-        type={field.type || 'text'}
-        placeholder={field.placeholder}
-        required={field.required}
-        error={errors[field.name]}
-        className="border-gray-300 focus:ring-[#3656E5] focus:border-[#3656E5] text-sm py-2 px-2"
-      />
-    )}
-  </div>
-))}
-
+                    {section.fields.map((field, idx) => (
+                      <div key={field.name} className="space-y-1">
+                        {field.name === 'altContact' ? (
+                          <div>
+                            <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-700">
+                              {field.label}
+                            </label>
+                            <div className="flex">
+                              <select
+                                name="countryCode"
+                                value={formData.altContact?.countryCode || '+91'}
+                                onChange={(e) => handleChange(e)}
+                                className="w-2/3 sm:w-1/4 py-2 text-sm border border-gray-500 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#3656E5] focus:border-[#3656E5]"
+                              >
+                                {countryCodes.map((code) => (
+                                  <option key={code} value={code}>
+                                    {code}
+                                  </option>
+                                ))}
+                              </select>
+                              <input
+                                type="text"
+                                name="phone"
+                                value={formData.altContact?.phone || ''}
+                                onChange={(e) => handleChange(e)}
+                                placeholder={field.placeholder}
+                                className="w-2/3 sm:w-3/4 px-3 py-2 text-sm border border-l-0 border-gray-500 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#3656E5] focus:border-[#3656E5]"
+                              />
+                            </div>
+                            {errors.altContact && (
+                              <p className="text-xs text-red-600 mt-1">{errors.altContact}</p>
+                            )}
+                          </div>
+                        ) : (
+                          <FormInput
+                            label={field.label}
+                            name={field.name}
+                            value={formData[field.name] || ''}
+                            onChange={handleChange}
+                            type={field.type || 'text'}
+                            placeholder={field.placeholder}
+                            required={field.required}
+                            error={errors[field.name]}
+                            className="border-gray-300 focus:ring-[#3656E5] focus:border-[#3656E5] text-sm py-2 px-2"
+                          />
+                        )}
+                      </div>
+                    ))}
                     {/* Additional contacts section */}
                     <div className="mt-8 col-span-1 sm:col-span-2">
                       <h4 className="text-base sm:text-lg font-medium text-gray-700 mb-2">Additional Contacts</h4>
@@ -569,7 +586,7 @@ const UniversityRegister = () => {
                       ) : field.type === 'select' ? (
                         // Dropdown for university type, affiliation, state
                         <div>
-                          <label className="mb-2 block text- sm:text-sm font-medium text-gray-700">
+                          <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-700">
                             {field.label}
                           </label>
                           <select
