@@ -12,7 +12,8 @@ import {
   faSpinner,
   faUpload,
   faTimes,
-} from '@fortawesome/free-solid-svg-icons'; // Icons for form sections
+  faBriefcase,
+} from '@fortawesome/free-solid-svg-icons';
 
 const UniversityRegister = () => {
   // State to store form data (all input fields)
@@ -26,6 +27,7 @@ const UniversityRegister = () => {
     city: '',
     state: '',
     pincode: '',
+    altContact: { countryCode: '+91', phone: '' }, // Added altContact as an object
     contacts: [{ type: 'registrar', name: '', email: '', phone: '', countryCode: '+91' }],
     coursesFile: null,
     streams: '',
@@ -41,6 +43,11 @@ const UniversityRegister = () => {
     adminEmail: '',
     password: '',
     confirmPassword: '',
+    placementRate: '',
+    topRecruiters: '',
+    averagePackage: '',
+    highestPackage: '',
+    placementCellContactEmail: '',
   });
 
   // State for form errors and submission status
@@ -63,7 +70,7 @@ const UniversityRegister = () => {
   const countryCodes = ['+91', '+1', '+44', '+61', '+81', '+86', '+971'];
   const requiredFields = ['name', 'type', 'adminEmail', 'password', 'confirmPassword'];
 
-  // Calculate form completion progress (percentage of required fields filled)
+  // Calculate form completion progress
   const progress = useMemo(() => {
     const filledFields = requiredFields.filter(
       (field) => formData[field] && formData[field].trim() !== ''
@@ -71,7 +78,7 @@ const UniversityRegister = () => {
     return Math.round((filledFields / requiredFields.length) * 100);
   }, [formData]);
 
-  // Validate form inputs before submission
+  // Validate form inputs
   const validateForm = () => {
     const newErrors = {};
     if (!formData.name) newErrors.name = 'University name is required';
@@ -98,10 +105,13 @@ const UniversityRegister = () => {
     if (formData.coursesFile && !['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'].includes(formData.coursesFile.type)) {
       newErrors.coursesFile = 'Courses file must be an Excel file';
     }
+    if (formData.placementCellContactEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.placementCellContactEmail)) {
+      newErrors.placementCellContactEmail = 'Invalid email format';
+    }
     return newErrors;
   };
 
-  // Handle input changes (text, select, files)
+  // Handle input changes
   const handleChange = (e, index = null) => {
     const { name, value, files } = e.target;
     if (files) {
@@ -133,6 +143,18 @@ const UniversityRegister = () => {
     }
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  // Handle altContact changes (country code and phone)
+  const handleAltContactChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      altContact: { ...prev.altContact, [name]: value },
+    }));
+    if (errors.altContact) {
+      setErrors((prev) => ({ ...prev, altContact: '' }));
     }
   };
 
@@ -171,38 +193,102 @@ const UniversityRegister = () => {
   };
 
   // Handle form submission
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const formErrors = validateForm();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formErrors = validateForm();
 
-  if (Object.keys(formErrors).length > 0) {
-    setErrors(formErrors);
-    return;
-  }
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
 
-  setIsSubmitting(true);
-  try {
-    const newUniversity = {
-      name: formData.name,
-      state: formData.state,
-      city: formData.city,
-      logo: formData.logo ? URL.createObjectURL(formData.logo) : '', // convert image to preview URL
-      streams: formData.streams,
-    };
+    setIsSubmitting(true);
+    try {
+      const fileToBase64 = (file) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
 
-    // Save to localStorage
-    const existingUniversities = JSON.parse(localStorage.getItem('universities')) || [];
-    existingUniversities.push(newUniversity);
-    localStorage.setItem('universities', JSON.stringify(existingUniversities));
+      const newUniversity = {
+        id: Date.now(),
+        name: formData.name,
+        type: formData.type,
+        affiliation: formData.affiliation,
+        established: formData.established,
+        website: formData.website,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        pincode: formData.pincode,
+        altContact: formData.altContact, // Save altContact object
+        contacts: formData.contacts,
+        streams: formData.streams,
+        students: formData.students,
+        faculty: formData.faculty,
+        hostel: formData.hostel,
+        campusArea: formData.campusArea,
+        about: formData.about,
+        logo: formData.logo ? await fileToBase64(formData.logo) : null,
+        brochure: formData.brochure ? await fileToBase64(formData.brochure) : null,
+        images: await Promise.all(formData.images.map(fileToBase64)),
+        videos: await Promise.all(formData.videos.map(fileToBase64)),
+        adminEmail: formData.adminEmail,
+        password: formData.password,
+        placementRate: formData.placementRate,
+        topRecruiters: formData.topRecruiters,
+        averagePackage: formData.averagePackage,
+        highestPackage: formData.highestPackage,
+        placementCellContactEmail: formData.placementCellContactEmail,
+      };
 
-    alert('University registered successfully!');
-    // Reset the form...
-  } catch (error) {
-    alert('Error submitting registration.');
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+      const existingUniversities = JSON.parse(localStorage.getItem('universities')) || [];
+      existingUniversities.push(newUniversity);
+      localStorage.setItem('universities', JSON.stringify(existingUniversities));
+
+      alert('University registered successfully!');
+      setFormData({
+        name: '',
+        type: '',
+        affiliation: '',
+        established: '',
+        website: '',
+        address: '',
+        city: '',
+        state: '',
+        pincode: '',
+        altContact: { countryCode: '+91', phone: '' },
+        contacts: [{ type: 'registrar', name: '', email: '', phone: '', countryCode: '+91' }],
+        coursesFile: null,
+        streams: '',
+        students: '',
+        faculty: '',
+        hostel: '',
+        campusArea: '',
+        about: '',
+        logo: null,
+        brochure: null,
+        images: [],
+        videos: [],
+        adminEmail: '',
+        password: '',
+        confirmPassword: '',
+        placementRate: '',
+        topRecruiters: '',
+        averagePackage: '',
+        highestPackage: '',
+        placementCellContactEmail: '',
+      });
+      setImagePreviews([]);
+      setVideoPreviews([]);
+    } catch (error) {
+      alert('Error submitting registration.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Form sections configuration
   const formSections = [
@@ -256,20 +342,43 @@ const handleSubmit = async (e) => {
       icon: faPhone,
       fields: [
         { label: 'Contact Email / Phone', name: 'contact', placeholder: 'Enter primary contact' },
-        { label: 'Alternate Contact', name: 'altContact', type: 'number', placeholder: 'Enter alternate contact' },
+        { label: 'Alternate Contact', name: 'altContact', customRender: () => (
+          <div>
+            <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-700">Alternate Contact</label>
+            <div className="flex">
+              <select
+                name="countryCode"
+                value={formData.altContact.countryCode}
+                onChange={handleAltContactChange}
+                className="w-2/3 sm:w-1/4 py-2 text-sm border border-gray-500 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#3656E5] focus:border-[#3656E5]"
+              >
+                {countryCodes.map((code) => (
+                  <option key={code} value={code}>{code}</option>
+                ))}
+              </select>
+              <input
+                type="text"
+                name="phone"
+                value={formData.altContact.phone}
+                onChange={handleAltContactChange}
+                placeholder="Enter alternate contact"
+                className="w-2/3 sm:w-3/4 px-3 py-2 text-sm border border-l-0 border-gray-500 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#3656E5] focus:border-[#3656E5]"
+              />
+            </div>
+            {errors.altContact && <p className="text-xs text-red-600 mt-1">{errors.altContact}</p>}
+          </div>
+        )},
       ],
     },
     {
       title: 'Academic Details',
       icon: faBook,
       fields: [
-
         { label: 'Popular Streams', name: 'streams', placeholder: 'e.g., Engineering, Arts' },
         { label: 'Total Students', name: 'students', type: 'number', placeholder: 'Enter number of students' },
         { label: 'Total Faculty', name: 'faculty', type: 'number', placeholder: 'Enter number of faculty' },
         { label: 'Hostel Available', name: 'hostel', placeholder: 'Yes / No' },
         { label: 'Campus Area (in acres)', name: 'campusArea', type: 'number', placeholder: 'Enter area in acres' },
-
         {
           label: 'Courses Excel File',
           name: 'coursesFile',
@@ -277,7 +386,7 @@ const handleSubmit = async (e) => {
           placeholder: 'Upload courses (Excel)',
           accept: '.xls,.xlsx'
         },
-                {
+        {
           label: 'Download e.g. Excel Sheet',
           name: 'sampleExcel',
           type: 'download',
@@ -297,6 +406,17 @@ const handleSubmit = async (e) => {
       ],
     },
     {
+      title: 'Placement & Career Services',
+      icon: faBriefcase,
+      fields: [
+        { label: 'Placement Rate (%)', name: 'placementRate', type: 'number', placeholder: 'Enter placement rate (e.g., 85)' },
+        { label: 'Top Recruiters', name: 'topRecruiters', placeholder: 'e.g., Google, Microsoft, TCS' },
+        { label: 'Average Package', name: 'averagePackage', placeholder: 'e.g., 10 LPA or $50,000' },
+        { label: 'Highest Package', name: 'highestPackage', placeholder: 'e.g., 20 LPA or $100,000' },
+        { label: 'Placement Cell Contact Email', name: 'placementCellContactEmail', type: 'email', placeholder: 'Enter placement cell email' },
+      ],
+    },
+    {
       title: 'Admin Credentials',
       icon: faUserShield,
       fields: [
@@ -310,17 +430,13 @@ const handleSubmit = async (e) => {
   const contactTypes = ['Director', 'Examiner', 'Vice Chancellor', 'MD', 'Owner', 'Registrar', 'Other'];
 
   return (
-    // Main container: Full-screen, light gray background, centered content
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
-      {/* Form card: White background, rounded, shadow, responsive padding */}
       <div className="w-full max-w-5xl bg-white rounded-xl shadow-xl p-4 sm:p-6 lg:p-15">
-        {/* Header with title and progress circle */}
         <div className="relative mb-6">
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#3656E5] text-center">
             University Registration
           </h2>
-          {/* Progress circle: SVG with Tailwind classes for styling */}
-          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14">
+          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14">
             <svg className="w-full h-full" viewBox="0 0 100 100">
               <circle
                 className="text-gray-200"
@@ -356,76 +472,37 @@ const handleSubmit = async (e) => {
             </svg>
           </div>
         </div>
-        {/* Form with sections */}
         <form onSubmit={handleSubmit} className="space-y-8">
           {formSections.map((section, index) => (
             <div key={index} className="space-y-4">
-              {/* Section title with icon */}
               <h3 className="text-lg sm:text-xl font-semibold text-[#3656E5] border-b border-gray-200 py-1 flex items-center">
                 <FontAwesomeIcon icon={section.icon} className="mr-2 text-[#3656E5] text-base sm:text-lg" />
                 {section.title}
               </h3>
-              {/* Grid for form fields: 1 column on mobile, 2 on larger screens */}
               <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-15 gap-y-8">
                 {section.title === 'Contact Information' ? (
                   <>
-
-                  {/* ALTERNATE CONTACT  */}
-{section.fields.map((field, idx) => (
-  <div key={field.name} className="space-y-1">
-    {field.name === 'altContact' ? (
-      <div>
-        <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-700">
-          {field.label}
-        </label>
-        <div className="flex">
-          <select
-            name="countryCode"
-            value={formData.altContact?.countryCode || '+91'}
-            onChange={(e) => handleAltContactChange(e)}
-            className="w-2/3 sm:w-1/4 py-2 text-sm border border-gray-500 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#3656E5] focus:border-[#3656E5]"
-          >
-            {countryCodes.map((code) => (
-              <option key={code} value={code}>
-                {code}
-              </option>
-            ))}
-          </select>
-          <input
-            type="text"
-            name="phone"
-            value={formData.altContact?.phone || ''}
-            onChange={(e) => handleAltContactChange(e)}
-            placeholder={field.placeholder}
-            className="w-2/3 sm:w-3/4 px-3 py-2 text-sm border border-l-0 border-gray-500 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-[#3656E5] focus:border-[#3656E5]"
-          />
-        </div>
-        {errors.altContact && (
-          <p className="text-xs text-red-600 mt-1">{errors.altContact}</p>
-        )}
-      </div>
-    ) : (
-      <FormInput
-        label={field.label}
-        name={field.name}
-        value={formData[field.name] || ''}
-        onChange={handleChange}
-        type={field.type || 'text'}
-        placeholder={field.placeholder}
-        required={field.required}
-        error={errors[field.name]}
-        className="border-gray-300 focus:ring-[#3656E5] focus:border-[#3656E5] text-sm py-2 px-2"
-      />
-    )}
-  </div>
-))}
-
-                    {/* Additional contacts section */}
+                    {section.fields.map((field, idx) => (
+                      <div key={field.name} className="space-y-1">
+                        {field.customRender ? field.customRender() : (
+                          <FormInput
+                            label={field.label}
+                            name={field.name}
+                            value={formData[field.name] || ''}
+                            onChange={handleChange}
+                            type={field.type || 'text'}
+                            placeholder={field.placeholder}
+                            required={field.required}
+                            error={errors[field.name]}
+                            className="border-gray-300 focus:ring-[#3656E5] focus:border-[#3656E5] text-sm py-2 px-2"
+                          />
+                        )}
+                      </div>
+                    ))}
                     <div className="mt-8 col-span-1 sm:col-span-2">
                       <h4 className="text-base sm:text-lg font-medium text-gray-700 mb-2">Additional Contacts</h4>
                       {formData.contacts.map((contact, idx) => (
                         <div key={idx} className="mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-3 mb-4">
-                          {/* Contact type dropdown */}
                           <div className="flex-1">
                             <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-700">Contact Type</label>
                             <select
@@ -440,7 +517,6 @@ const handleSubmit = async (e) => {
                               ))}
                             </select>
                           </div>
-                          {/* Contact name input */}
                           <div className="flex-1">
                             <FormInput
                               label="Name"
@@ -451,7 +527,6 @@ const handleSubmit = async (e) => {
                               className="text-sm py-2 px-3"
                             />
                           </div>
-                          {/* Contact email input */}
                           <div className="flex-1">
                             <FormInput
                               label="Email"
@@ -465,7 +540,6 @@ const handleSubmit = async (e) => {
                               <p className="text-xs text-red-600 mt-1">{errors[`contactEmail${idx}`]}</p>
                             )}
                           </div>
-                          {/* Contact phone with country code */}
                           <div className="flex-1">
                             <label className="mb-2 block text-xs sm:text-sm font-medium text-gray-700">Phone</label>
                             <div className="flex">
@@ -489,7 +563,6 @@ const handleSubmit = async (e) => {
                               />
                             </div>
                           </div>
-                          {/* Remove contact button */}
                           {formData.contacts.length > 1 && (
                             <button
                               type="button"
@@ -501,7 +574,6 @@ const handleSubmit = async (e) => {
                           )}
                         </div>
                       ))}
-                      {/* Add contact button */}
                       <button
                         type="button"
                         onClick={addContact}
@@ -515,7 +587,6 @@ const handleSubmit = async (e) => {
                   section.fields.map((field) => (
                     <div key={field.name} className="space-y-1">
                       {field.type === 'file' ? (
-                        // File input for logo, brochure, images, videos
                         <div>
                           <label className="block text-xs sm:text-sm font-medium text-gray-700">
                             {field.label}
@@ -538,9 +609,8 @@ const handleSubmit = async (e) => {
                           )}
                         </div>
                       ) : field.type === 'select' ? (
-                        // Dropdown for university type, affiliation, state
                         <div>
-                          <label className="mb-2 block text- sm:text-sm font-medium text-gray-700">
+                          <label className="mb-2 block text-sm font-medium text-gray-700">
                             {field.label}
                           </label>
                           <select
@@ -556,7 +626,6 @@ const handleSubmit = async (e) => {
                           </select>
                         </div>
                       ) : field.type === 'download' ? (
-                        // Download link for sample Excel file
                         <div className="border border-gray-500 rounded-lg p-2">
                           <label className="block text-xs sm:text-sm font-medium text-gray-700">
                             {field.label}
@@ -570,7 +639,6 @@ const handleSubmit = async (e) => {
                           </a>
                         </div>
                       ) : (
-                        // Standard input using FormInput component
                         <FormInput
                           label={field.label}
                           name={field.name}
@@ -591,7 +659,6 @@ const handleSubmit = async (e) => {
                 )}
                 {section.title === 'Media' && (
                   <>
-                    {/* Display uploaded image previews */}
                     {imagePreviews.length > 0 && (
                       <div className="col-span-1 sm:col-span-2">
                         <h4 className="text-base sm:text-lg font-medium text-gray-700 mb-2">Uploaded Images</h4>
@@ -613,7 +680,6 @@ const handleSubmit = async (e) => {
                         </div>
                       </div>
                     )}
-                    {/* Display uploaded video previews */}
                     {videoPreviews.length > 0 && (
                       <div className="col-span-1 sm:col-span-2">
                         <h4 className="text-base sm:text-lg font-medium text-gray-700 mb-2">Uploaded Videos</h4>
@@ -640,7 +706,6 @@ const handleSubmit = async (e) => {
               </div>
             </div>
           ))}
-          {/* About University section */}
           <div className="space-y-4">
             <h3 className="text-lg sm:text-xl font-semibold text-[#3656E5] border-b border-gray-200 pb-1 flex items-center">
               <FontAwesomeIcon icon={faInfoCircle} className="mr-2 text-[#3656E5] text-base sm:text-lg" />
@@ -660,7 +725,6 @@ const handleSubmit = async (e) => {
               />
             </div>
           </div>
-          {/* Submit button */}
           <div className="flex justify-center">
             <button
               type="submit"
