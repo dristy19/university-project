@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CollegeCard from '../components/CollegeCard';
-import { colleges } from '../data/mockData';
+import { colleges as mockColleges } from '../data/mockData';
 
 const Colleges = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [colleges, setColleges] = useState([]);
+
+  useEffect(() => {
+    const savedUniversities = JSON.parse(localStorage.getItem('universities')) || [];
+    const combined = [...mockColleges, ...savedUniversities];
+    setColleges(combined);
+  }, []);
 
   const filteredColleges = colleges.filter((college) =>
     college.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -27,13 +34,9 @@ const Colleges = () => {
 
         {/* College Grid */}
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredColleges.length > 0 ? (
-            filteredColleges.map((college, index) => (
-              <CollegeCard key={index} college={college} />
-            ))
-          ) : (
-            <p className="text-gray-500 col-span-full">No colleges found for "{searchTerm}".</p>
-          )}
+          {filteredColleges.map((college, index) => (
+            <CollegeCard key={index} college={college} />
+          ))}
         </div>
       </div>
     </div>
