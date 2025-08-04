@@ -17,26 +17,32 @@ const Colleges = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-10">
+    <div className="min-h-screen bg-gray-100 py-10 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-blue-600 mb-6">Top Colleges in India</h2>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#3656E5] mb-8 text-center">Top Colleges in India</h2>
 
         {/* Search Bar */}
-        <div className="mb-8">
+        <div className="mb-8 flex justify-center">
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by college name..."
-            className="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full max-w-md px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#3656E5] text-gray-700"
           />
         </div>
 
         {/* College Grid */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredColleges.map((college, index) => (
-            <CollegeCard key={index} college={college} />
-          ))}
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
+            {filteredColleges.length > 0 ? (
+              filteredColleges.map((college) => (
+                <CollegeCard key={college.id} college={college} />
+              ))
+            ) : (
+              <p className="text-gray-600 text-lg text-center col-span-full">No colleges found.</p>
+            )}
+          </div>
         </div>
       </div>
     </div>
