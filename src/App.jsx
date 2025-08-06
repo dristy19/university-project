@@ -1,4 +1,3 @@
-// src/App.jsx
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -15,6 +14,10 @@ import CourseRecommender from './pages/CourseRecommender';
 import CollegePage from './pages/CollegePage';
 import StudentRegister from './pages/StudentRegister';
 import UniversityRegister from './pages/UniversityRegister';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import UniversityDashboard from './pages/UniversityDashboard';
+
 
 const App = () => {
   return (
@@ -34,6 +37,9 @@ const App = () => {
           <Route path="/college/:id" element={<CollegePage />} />
           <Route path="/student-register" element={<StudentRegister />} />
           <Route path="/university-register" element={<UniversityRegister />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/university-dashboard" element={<UniversityDashboard />} />
 
           {/* Optional: 404 Page */}
           <Route path="*" element={<div className="p-6 text-center text-red-600">Page Not Found</div>} />

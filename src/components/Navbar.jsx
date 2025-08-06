@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUniversity, faBookOpen, faGraduationCap, faQuestionCircle, faUserPlus, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUniversity, faBookOpen, faGraduationCap, faQuestionCircle, faBars, faTimes, faSignInAlt, faUser, faTachometerAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +19,7 @@ const Navbar = () => {
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
           className="text-gray-700 hover:text-blue-600 focus:outline-none"
         >
+Disney
           <FontAwesomeIcon icon={isOpen ? faTimes : faBars} className="h-6 w-6" />
         </button>
       </div>
@@ -74,12 +75,28 @@ const Navbar = () => {
           Q&A
         </Link>
         <Link
-          to="/student-register"
+          to="/University-Dashboard"
+          className="hover:text-blue-600 flex items-center gap-1 py-2 md:py-0"
+          onClick={() => setIsOpen(false)}
+        >
+          <FontAwesomeIcon icon={faTachometerAlt} className="h-4 w-4" />
+          University Dashboard
+        </Link>
+        <Link
+          to="/login"
           className="bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 text-sm font-medium flex items-center gap-1"
           onClick={() => setIsOpen(false)}
         >
-          <FontAwesomeIcon icon={faUserPlus} className="h-4 w-4" />
-          Register
+          <FontAwesomeIcon icon={faSignInAlt} className="h-4 w-4" />
+          Login
+        </Link>
+        <Link
+          to="/signup"
+          className="bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 text-sm font-medium flex items-center gap-1"
+          onClick={() => setIsOpen(false)}
+        >
+          <FontAwesomeIcon icon={faUser} className="h-4 w-4" />
+          Signup
         </Link>
       </div>
     </nav>

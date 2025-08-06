@@ -78,8 +78,87 @@ const CollegePage = () => {
                 <p className="text-gray-600">{college.affiliation || 'N/A'}</p>
               </div>
               <div className="flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-700 mr-2">Year Established:</p>
+                <p className="text-sm font-medium text-gray-700 mr-2">Established:</p>
                 <p className="text-gray-600">{college.established || 'N/A'}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Location Details */}
+          <div className="bg-gray-100 p-4 rounded-lg">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#3656E5] flex items-center mb-8">
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
+              <span className="border-b-2 border-[#3656E5]">Location Details</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center mb-6">
+              <div className="flex items-center justify-center">
+                <p className="text-sm font-medium text-gray-700 mr-2">Address:</p>
+                <p className="text-gray-600">{college.address || 'N/A'}</p>
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="text-sm font-medium text-gray-700 mr-2">Pincode:</p>
+                <p className="text-gray-600">{college.pincode || 'N/A'}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Information */}
+          <div className="bg-gray-100 p-4 rounded-lg">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#3656E5] flex items-center mb-8">
+              <FontAwesomeIcon icon={faPhone} className="mr-2" />
+              <span className="border-b-2 border-[#3656E5]">Contact Information</span>
+            </h2>
+            {college.contacts && college.contacts.length > 0 ? (
+              <div className="space-y-4 mb-5">
+                {college.contacts.map((contact, index) => (
+                  <div key={index}>
+                    <p className="text-sm font-medium text-gray-700">{contact.type || 'Contact'}:</p>
+                    <div className="flex items-center justify-center">
+                      <p className="text-sm font-medium text-gray-700 mr-2">Name:</p>
+                      <p className="text-gray-600">{contact.name || 'N/A'}</p>
+                    </div>
+                    <div className="flex items-center justify-center">
+                      <p className="text-sm font-medium text-gray-700 mr-2">Email:</p>
+                      <p className="text-gray-600">{contact.email || 'N/A'}</p>
+                    </div>
+                    <div className="flex items-center justify-center">
+                      <p className="text-sm font-medium text-gray-700 mr-2">Phone:</p>
+                      <p className="text-gray-600">{contact.countryCode || ''}{contact.phone || 'N/A'}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-600 text-center">No contact information available.</p>
+            )}
+          </div>
+
+          {/* Academic Details */}
+          <div className="bg-gray-100 p-4 rounded-lg">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#3656E5] flex items-center mb-8">
+              <FontAwesomeIcon icon={faBook} className="mr-2" />
+              <span className="border-b-2 border-[#3656E5]">Academic Details</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center mb-6">
+              <div className="flex items-center justify-center">
+                <p className="text-sm font-medium text-gray-700 mr-2">Popular Streams:</p>
+                <p className="text-gray-600">{college.streams || 'N/A'}</p>
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="text-sm font-medium text-gray-700 mr-2">Total Students:</p>
+                <p className="text-gray-600">{college.students || 'N/A'}</p>
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="text-sm font-medium text-gray-700 mr-2">Total Faculty:</p>
+                <p className="text-gray-600">{college.faculty || 'N/A'}</p>
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="text-sm font-medium text-gray-700 mr-2">Hostel Available:</p>
+                <p className="text-gray-600">{college.hostel || 'N/A'}</p>
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="text-sm font-medium text-gray-700 mr-2">Campus Area:</p>
+                <p className="text-gray-600">{college.campusArea ? `${college.campusArea} acres` : 'N/A'}</p>
               </div>
             </div>
           </div>
@@ -115,94 +194,6 @@ const CollegePage = () => {
               </div>
             </div>
           )}
-
-          {/* Academic Details */}
-          <div className="bg-gray-100 p-4 rounded-lg">
-            <h2 className="text-lg sm:text-xl font-semibold text-[#3656E5] flex items-center mb-8">
-              <FontAwesomeIcon icon={faBook} className="mr-2" />
-              <span className="border-b-2 border-[#3656E5]">Academic Details</span>
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center mb-6">
-              <div className="flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-700 mr-2">Popular Streams:</p>
-                <p className="text-gray-600">{college.streams || 'N/A'}</p>
-              </div>
-              <div className="flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-700 mr-2">Total Students:</p>
-                <p className="text-gray-600">{college.students || 'N/A'}</p>
-              </div>
-              <div className="flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-700 mr-2">Total Faculty:</p>
-                <p className="text-gray-600">{college.faculty || 'N/A'}</p>
-              </div>
-              <div className="flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-700 mr-2">Hostel Available:</p>
-                <p className="text-gray-600">{college.hostel || 'N/A'}</p>
-              </div>
-              <div className="flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-700 mr-2">Campus Area:</p>
-                <p className="text-gray-600">{college.campusArea ? `${college.campusArea} acres` : 'N/A'}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Location Details */}
-          <div className="bg-gray-100 p-4 rounded-lg">
-            <h2 className="text-lg sm:text-xl font-semibold text-[#3656E5] flex items-center mb-8">
-              <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
-              <span className="border-b-2 border-[#3656E5]">Location Details</span>
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center mb-6">
-              <div className="flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-700 mr-2">Address:</p>
-                <p className="text-gray-600">{college.address || 'N/A'}</p>
-              </div>
-              <div className="flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-700 mr-2">Pincode:</p>
-                <p className="text-gray-600">{college.pincode || 'N/A'}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Information */}
-          <div className="bg-gray-100 p-4 rounded-lg">
-            <h2 className="text-lg sm:text-xl font-semibold text-[#3656E5] flex items-center mb-8">
-              <FontAwesomeIcon icon={faPhone} className="mr-2" />
-              <span className="border-b-2 border-[#3656E5]">Contact Information</span>
-            </h2>
-            {college.contacts && college.contacts.length > 0 ? (
-              <div className="space-y-4 mb-5">
-                {college.contacts.map((contact, index) => (
-                  <div key={index}>
-                    <p className="text-sm font-medium text-gray-700">Contact Type: {contact.type || 'N/A'}</p>
-                    <div className="flex items-center justify-center">
-                      <p className="text-sm font-medium text-gray-700 mr-2">Name:</p>
-                      <p className="text-gray-600">{contact.name || 'N/A'}</p>
-                    </div>
-                    <div className="flex items-center justify-center">
-                      <p className="text-sm font-medium text-gray-700 mr-2">Email:</p>
-                      <p className="text-gray-600">{contact.email || 'N/A'}</p>
-                    </div>
-                    <div className="flex items-center justify-center">
-                      <p className="text-sm font-medium text-gray-700 mr-2">Phone:</p>
-                      <p className="text-gray-600">{(contact.countryCode || '') + (contact.phone || 'N/A')}</p>
-                    </div>
-                  </div>
-                ))}
-                {college.altContact && college.altContact.phone && (
-                  <div>
-                    <p className="text-sm font-medium text-gray-700">Alternate Contact:</p>
-                    <div className="flex items-center justify-center">
-                      <p className="text-sm font-medium text-gray-700 mr-2">Phone:</p>
-                      <p className="text-gray-600">{(college.altContact.countryCode || '+91') + college.altContact.phone}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <p className="text-gray-600 text-center">No contact information available.</p>
-            )}
-          </div>
 
           {/* About University with Read More */}
           <div className="bg-gray-100 p-4 rounded-lg">
