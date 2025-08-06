@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUniversity, faBookOpen, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
 
+import Navbar from '../components/Navbar';  
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 px-6 py-16 text-center flex flex-col justify-center items-center">
+    <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 px-6 py-16 text-center flex flex-col justify-center items-center">
+         <Navbar />
       <h1 className="text-4xl md:text-5xl font-extrabold text-blue-700 mb-4 drop-shadow-sm">
         Welcome to <span className="text-blue-500">The University Hub</span>
       </h1>

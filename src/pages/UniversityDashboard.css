@@ -1,0 +1,4 @@
+.lower-blur {
+  backdrop-filter: blur(1px); /* Lower blur effect, 1px */
+  -webkit-backdrop-filter: blur(1px); /* for Safari support */
+}

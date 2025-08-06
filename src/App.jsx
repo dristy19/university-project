@@ -18,13 +18,9 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import UniversityDashboard from './pages/UniversityDashboard';
 
-
 const App = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar always on top */}
-      <Navbar />
-
       {/* Main Content Area */}
       <main className="flex-grow">
         <Routes>
@@ -45,9 +41,6 @@ const App = () => {
           <Route path="*" element={<div className="p-6 text-center text-red-600">Page Not Found</div>} />
         </Routes>
       </main>
-
-      {/* Footer always at bottom */}
-      <Footer />
     </div>
   );
 };
