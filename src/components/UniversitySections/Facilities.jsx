@@ -3,7 +3,7 @@ import { FaBook, FaMicroscope, FaLaptop, FaChalkboardTeacher, FaBus, FaUtensils,
 import { MdLibraryBooks, MdMeetingRoom, MdComputer, MdEmergency } from 'react-icons/md';
 import { GiCricketBat, GiSoccerBall, GiTeacher } from 'react-icons/gi';
 import { BiPlus } from 'react-icons/bi';
-import './facilities.css';
+import './Facilities.css';
 
 const facilitiesData = [
   {
@@ -187,24 +187,21 @@ const Facilities = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6">
-      <h2 className="text-xl sm:text-2xl font-bold mb-3 text-white">Campus Facilities</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div className="container">
+      <h2 className="title">Campus Facilities</h2>
+      <div className="grid">
         {facilitiesData.map((facility) => (
-          <div
-            key={facility.id}
-            className="facility-card border border-gray-700 rounded-lg p-3 shadow-md hover:shadow-lg transition duration-200 bg-gray-800"
-          >
-            <div className="flex items-center space-x-2 mb-2 text-yellow-400">
+          <div key={facility.id} className="facility-card">
+            <div className="facility-header">
               {facility.icon}
-              <h3 className="font-semibold text-base sm:text-lg">{facility.name}</h3>
+              <h3 className="facility-title">{facility.name}</h3>
             </div>
-            <p className="text-xs sm:text-sm text-gray-50 mb-2">{facility.description}</p>
-            <div className="text-xs text-gray-50 mb-2">
+            <p className="facility-description">{facility.description}</p>
+            <div className="reviews">
               {facility.reviews.length ? (
-                <ul className="list-disc pl-4">
+                <ul>
                   {facility.reviews.map((review, index) => (
-                    <li key={index} className="text-xs">{typeof review === 'object' ? review.text : review}</li>
+                    <li key={index}>{typeof review === 'object' ? review.text : review}</li>
                   ))}
                 </ul>
               ) : (
@@ -213,7 +210,7 @@ const Facilities = () => {
             </div>
             <button
               onClick={() => setSelectedFacility(facility)}
-              className="text-gray-50 text-xs sm:text-sm hover:underline flex items-center"
+              className="add-review"
             >
               <BiPlus className="mr-1" /> Add Review
             </button>
@@ -222,35 +219,35 @@ const Facilities = () => {
       </div>
 
       {/* All Reviews Section */}
-      <div className="mt-6 bg-gray-800 p-3 sm:p-4 rounded-lg shadow-md">
-        <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">All Reviews</h3>
+      <div className="reviews-section">
+        <h3 className="reviews-title">All Reviews</h3>
         {facilitiesData
           .flatMap((facility) => facility.reviews)
           .map((review, index) => (
-            <div key={index} className="mb-2 p-2 border-b border-gray-200">
-              <p className="text-xs sm:text-sm text-gray-50">{typeof review === 'object' ? review.text : review}</p>
+            <div key={index} className="review-item">
+              <p className="review-text">{typeof review === 'object' ? review.text : review}</p>
               {typeof review === 'object' && (
-                <p class Jena="text-xs text-gray-500">Rating: {review.rating} / 5 | Posted: {review.timestamp}</p>
+                <p className="review-meta">Rating: {review.rating} / 5 | Posted: {review.timestamp}</p>
               )}
             </div>
           ))}
         {facilitiesData.every((facility) => facility.reviews.length === 0) && (
-          <p className="text-xs sm:text-sm text-gray-500">No reviews available yet.</p>
+          <p className="no-reviews">No reviews available yet.</p>
         )}
       </div>
 
       {/* Review Modal */}
       {selectedFacility && (
-        <div className="modal fixed inset-0 flex items-center justify-center z-50">
-          <div className="modal-content bg-white p-4 sm:p-6 rounded-md w-[90%] max-w-md backdrop-blur-md bg-opacity-90">
-            <h3 className="text-base sm:text-lg font-semibold mb-2 text-gray-800">Review for {selectedFacility.name}</h3>
+        <div className="modal">
+          <div className="modal-content">
+            <h3 className="modal-title">Review for {selectedFacility.name}</h3>
             <div className="mb-3">
-              <label className="block text-xs sm:text-sm text-gray-700 mb-1">Rating:</label>
-              <div className="flex space-x-1">
+              <label className="modal-label">Rating:</label>
+              <div className="rating">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <FaStar
                     key={star}
-                    className={`cursor-pointer ${star <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                    className={`star ${star <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
                     onClick={() => setRating(star)}
                   />
                 ))}
@@ -261,18 +258,18 @@ const Facilities = () => {
               onChange={(e) => setReviewInput(e.target.value)}
               rows={3}
               placeholder="Write your review..."
-              className="w-full border border-gray-300 rounded p-2 mb-3 text-xs sm:text-sm text-gray-700"
+              className="textarea"
             />
-            <div className="flex justify-end space-x-2">
+            <div className="modal-buttons">
               <button
                 onClick={() => setSelectedFacility(null)}
-                className="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400 text-gray-800 text-xs sm:text-sm"
+                className="cancel-button"
               >
                 Cancel
               </button>
               <button
                 onClick={handleAddReview}
-                className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs sm:text-sm"
+                className="submit-button"
                 disabled={!reviewInput.trim() || rating === 0}
               >
                 Submit

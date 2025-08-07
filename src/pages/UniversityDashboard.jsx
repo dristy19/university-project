@@ -19,6 +19,8 @@ import Cutoff from '../components/UniversitySections/Cutoff';
 import Placement from '../components/UniversitySections/Placements';
 import Facilities from '../components/UniversitySections/Facilities';
 import Admission from '../components/UniversitySections/Admission';
+import QA from '../components/UniversitySections/QA';
+import Gallery from '../components/UniversitySections/Gallery';
 import Footer from '../components/Footer';
 import './universityDashboard.css';
 
@@ -237,6 +239,8 @@ function UniversityDashboard() {
           {activeSection === 'Placements' && <Placement />}
           {activeSection === 'Facilities' && <Facilities />}
           {activeSection === 'Admission' && <Admission />}
+          {activeSection === 'Q&A' && <QA />}
+          {activeSection === 'Gallery' && <Gallery />}
         </div>
       </div>
 

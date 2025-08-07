@@ -41,6 +41,14 @@ const Navbar = () => {
             Home
           </Link>
           <Link
+            to="/university-dashboard"
+            className="hover:text-blue-600 flex items-center gap-1 py-2 md:py-0"
+            onClick={() => setIsOpen(false)}
+          >
+            <FontAwesomeIcon icon={faUniversity} className="h-4 w-4" />
+            University Dashboard
+          </Link>
+          <Link
             to="/university-register"
             className="hover:text-blue-600 flex items-center gap-1 py-2 md:py-0"
             onClick={() => setIsOpen(false)}
