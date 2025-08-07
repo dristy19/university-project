@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Cutoff.css';
+import { applyTheme } from '../../utils/themeUtils';
 
 const cutoffData = [
   {
@@ -44,7 +45,15 @@ const cutoffData = [
   },
 ];
 
-const Cutoff = () => {
+const Info = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    applyTheme(darkMode);
+  }, [darkMode]);
+
+  const toggleTheme = () => setDarkMode(prev => !prev);
+
   return (
     <div className="cutoff-container">
       <h2>Cutoff for Year 2024</h2>
@@ -71,8 +80,8 @@ const Cutoff = () => {
                 <td>{ews}</td>
                 <td>{obc}</td>
                 <td>{sc}</td>
-                <td>{st === '-' ? '-' : st}</td>
-                <td>{pwd === '-' ? '-' : pwd}</td>
+                <td>{st}</td>
+                <td>{pwd}</td>
               </tr>
             ))}
           </tbody>
