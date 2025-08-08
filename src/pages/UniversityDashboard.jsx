@@ -13,6 +13,7 @@ import {
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import { applyTheme } from '../utils/themeUtils';
+import AboutUs from '../components/UniversitySections/Aboutus';
 import Info from '../components/UniversitySections/Info';
 import CoursesAndFees from '../components/UniversitySections/CoursesAndFees';
 import Cutoff from '../components/UniversitySections/Cutoff';
@@ -28,7 +29,7 @@ function UniversityDashboard() {
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState(null);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const [activeSection, setActiveSection] = useState('Info');
+  const [activeSection, setActiveSection] = useState('About');
   const dropdownRef = useRef(null);
   const scrollRef = useRef(null);
 
@@ -193,6 +194,7 @@ function UniversityDashboard() {
             className="tab-scroll"
           >
             {[
+              'About',
               'Info',
               'Courses & Fees',
               'Cutoff',
@@ -233,6 +235,7 @@ function UniversityDashboard() {
 
         {/* Render dynamic section based on selection */}
         <div className="content-section">
+          {activeSection === 'About' && <AboutUs />}
           {activeSection === 'Info' && <Info />}
           {activeSection === 'Courses & Fees' && <CoursesAndFees />}
           {activeSection === 'Cutoff' && <Cutoff />}

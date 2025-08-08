@@ -29,6 +29,7 @@ const QA = ({ isLoggedIn }) => {
 
   return (
     <div className="container mx-auto p-4 flex flex-col md:flex-row gap-6">
+      {/* <div className={`gallery-container ${darkMode ? 'dark' : ''}`}> */}
       {/* Q&A Section */}
       <div className="w-full md:w-2/3 bg-[var(--background-color)] text-[var(--text-color)] p-4 rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4">Ask a Question:</h2>

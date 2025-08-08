@@ -45,7 +45,7 @@ const cutoffData = [
   },
 ];
 
-const Info = () => {
+const Cutoff = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const Info = () => {
   const toggleTheme = () => setDarkMode(prev => !prev);
 
   return (
-    <div className="cutoff-container">
+    <div className={`cutoff-container ${darkMode ? 'dark' : ''}`}>
       <h2>Cutoff for Year 2024</h2>
       <div className="table-wrapper">
         <table className="cutoff-table">

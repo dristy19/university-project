@@ -16,11 +16,12 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  color: var(--text-color);
 }
 
 .hero-subtitle {
   font-size: 0.875rem;
-  color: var(--dropdown-text);
+  color: var(--border-color); /* Using border-color as a subtle gray */
   margin-bottom: 0.75rem;
 }
 
@@ -47,6 +48,7 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 0.75rem;
+  color: var(--text-color);
 }
 
 .recruiters-grid {
@@ -57,11 +59,15 @@
 }
 
 .recruiter-card {
-  background-color: var(--card-bg);
+  background-color: var(--button-primary); /* Using button-primary for light theme */
   padding: 0.5rem;
   border-radius: 0.25rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+}
+
+.dark .recruiter-card {
+  background-color: var(--dropdown-bg); /* Using dropdown-bg for dark theme */
 }
 
 .recruiter-card:hover {
@@ -104,14 +110,19 @@
 .stats-th,
 .stats-td {
   padding: 0.5rem;
-  border: 1px solid var(--table-border);
+  border: 1px solid var(--border-color);
   font-size: 0.75rem;
   text-align: center;
 }
 
+.dark .stats-th,
+.dark .stats-td {
+  border-color: var(--border-color); /* Using border-color for dark theme */
+}
+
 .stats-th {
-  background-color: var(--table-header-bg);
-  color: var(--dropdown-text);
+  background-color: var(--button-primary);
+  color: #FFFFFF;
 }
 
 /* Branch Section */
@@ -126,14 +137,19 @@
 
 .accordion-toggle {
   width: 100%;
-  background-color: var(--card-bg);
+  background-color: var(--button-primary); /* Using button-primary for light theme */
   padding: 0.5rem;
   border-radius: 0.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.875rem;
-  color: var(--dropdown-text);
+  color: #FFFFFF; /* White text for contrast */
+}
+
+.dark .accordion-toggle {
+  background-color: var(--dropdown-bg); /* Using dropdown-bg for dark theme */
+  color: var(--dropdown-text); /* Using dropdown-text for dark theme */
 }
 
 .accordion-title {
@@ -145,10 +161,15 @@
 }
 
 .accordion-content {
-  background-color: var(--content-bg);
+  background-color: var(--button-accent); /* Using button-accent for light theme */
   padding: 0.5rem;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
   font-size: 0.75rem;
-  color: var(--text-color);
+  color: var(--text-color); /* Using text-color for contrast */
+}
+
+.dark .accordion-content {
+  background-color: var(--dropdown-bg); /* Using dropdown-bg for dark theme */
+  color: var(--dropdown-text); /* Using dropdown-text for dark theme */
 }

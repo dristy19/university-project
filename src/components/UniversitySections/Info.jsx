@@ -35,7 +35,7 @@ const Info = () => {
   const toggleTheme = () => setDarkMode(prev => !prev);
 
   return (
-    <div className="info-two-col-container">
+    <div className={`info-two-col-container ${darkMode ? 'dark' : ''}`}>
       <h2 className="info-title">Delhi Technological University (DTU) Details</h2>
       <div className="info-grid">
         {leftItems.map((leftItem, idx) => {
