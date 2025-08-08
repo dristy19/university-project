@@ -12,7 +12,7 @@ import StudentRegister from './pages/StudentRegister';
 import UniversityRegister from './pages/UniversityRegister';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import UniversityDashboard from './pages/UniversityDashboard';
+import UniversityPage from './pages/UniversityPage';
 
 const App = () => {
   return (
@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/university-register" element={<UniversityRegister />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/university-dashboard" element={<UniversityDashboard />} />
+          <Route path="/university-page" element={<UniversityPage />} />
 
           {/* Optional: 404 Page */}
           <Route path="*" element={<div className="p-6 text-center text-red-600">Page Not Found</div>} />

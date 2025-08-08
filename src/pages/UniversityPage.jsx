@@ -23,9 +23,9 @@ import Admission from '../components/UniversitySections/Admission';
 import QA from '../components/UniversitySections/QA';
 import Gallery from '../components/UniversitySections/Gallery';
 import Footer from '../components/Footer';
-import './universityDashboard.css';
+import './UniversityPage.css';
 
-function UniversityDashboard() {
+function UniversityPage() {
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState(null);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -252,4 +252,4 @@ function UniversityDashboard() {
   );
 }
 
-export default UniversityDashboard;
+export default UniversityPage;
