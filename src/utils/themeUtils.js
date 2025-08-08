@@ -6,6 +6,7 @@ export const applyTheme = (darkMode) => {
         '--background-color': '#1E293B',
         '--text-color': '#FFFFFF',
         '--border-color': '#D1D5DB',
+        '--divider-color': '#4B5563',
         '--navbar-bg': 'linear-gradient(to right, #1E293B, #1D4ED8)',
         '--button-primary': '#1D4ED8',
         '--button-accent': '#FBBF24',
@@ -18,6 +19,7 @@ export const applyTheme = (darkMode) => {
         '--background-color': '#F9FAFB',
         '--text-color': '#1E293B',
         '--border-color': '#9CA3AF',
+        '--divider-color': '#05162fff',
         '--navbar-bg': 'linear-gradient(to right, #F9FAFB, #1D4ED8)',
         '--button-primary': '#1D4ED8',
         '--button-accent': '#FBBF24',
@@ -27,7 +29,7 @@ export const applyTheme = (darkMode) => {
         '--dropdown-text': '#1E293B',
       };
 
-  Object.entries(vars).forEach(([key, value]) => {
+  for (const [key, value] of Object.entries(vars)) {
     root.style.setProperty(key, value);
-  });
+  }
 };
