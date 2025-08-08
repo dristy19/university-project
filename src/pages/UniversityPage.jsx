@@ -24,6 +24,10 @@ import QA from '../components/UniversitySections/QA';
 import Gallery from '../components/UniversitySections/Gallery';
 import Footer from '../components/Footer';
 import './UniversityPage.css';
+import Rankings from '../components/UniversitySections/Rankings';
+import NewsArticles from '../components/UniversitySections/NewsArticles';
+import Reviews from '../components/UniversitySections/Reviews';
+
 
 function UniversityPage() {
   const [darkMode, setDarkMode] = useState(false);
@@ -244,6 +248,10 @@ function UniversityPage() {
           {activeSection === 'Admission' && <Admission />}
           {activeSection === 'Q&A' && <QA />}
           {activeSection === 'Gallery' && <Gallery />}
+          {activeSection === 'Reviews' && <Reviews />}
+          {activeSection === 'News & Articles' && <NewsArticles />}
+          {activeSection === 'Rankings' && <Rankings />}
+
         </div>
       </div>
 
