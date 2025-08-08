@@ -23,7 +23,7 @@ const App = () => {
       {/* Main Content Area */}
       <main className="flex-grow">
         <Routes>
-          <Route path="/university-page" element={<Home />} />
+          <Route path="/university-page" element={<UniversityPage />} />
           <Route path="/colleges" element={<Colleges />} />
           <Route path="/college/:id" element={<CollegePage />} />
           <Route path="/student-register" element={<StudentRegister />} />
