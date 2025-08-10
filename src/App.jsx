@@ -14,8 +14,6 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import UniversityPage from './pages/UniversityPage';
 import UniversityDashboard from './dashboard/UniversityDashboard';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsConditions from './pages/TermsConditions';
 
 const App = () => {
   return (
@@ -23,7 +21,7 @@ const App = () => {
       {/* Main Content Area */}
       <main className="flex-grow">
         <Routes>
-          <Route path="/university-page" element={<UniversityPage />} />
+          <Route path="/" element={<Home />} />
           <Route path="/colleges" element={<Colleges />} />
           <Route path="/college/:id" element={<CollegePage />} />
           <Route path="/student-register" element={<StudentRegister />} />
@@ -31,9 +29,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/university-page" element={<UniversityPage />} />
-          <Route path="/university-dashboard" element={<UniversityDashboard />} />  
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-and-conditions" element={<TermsConditions />} />
+          <Route path="/university-dashboard" element={<UniversityDashboard />} />
+
           {/* Optional: 404 Page */}
           <Route path="*" element={<div className="p-6 text-center text-red-600">Page Not Found</div>} />
         </Routes>
