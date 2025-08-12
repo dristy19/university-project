@@ -1,0 +1,30 @@
+.ud-news ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ud-news-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.95rem;
+}
+
+.ud-news-actions button {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.ud-news-actions button:hover,
+.ud-news-actions button:focus {
+  color: var(--color-primary-dark);
+  outline: none;
+}
