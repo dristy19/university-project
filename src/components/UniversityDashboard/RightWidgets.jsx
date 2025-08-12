@@ -1,4 +1,3 @@
-// src/components/UniversityDashboard/RightWidgets.jsx
 import React from "react";
 import { FaBook, FaMapMarkerAlt, FaCalendarAlt, FaChartLine } from "react-icons/fa";
 import { Bar } from "react-chartjs-2";

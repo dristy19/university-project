@@ -12,21 +12,20 @@
 
 .ud-right-widgets {
   overflow-y: auto;
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: var(--color-muted) transparent; /* Firefox */
+  scrollbar-width: thin; 
+  scrollbar-color: var(--color-muted) transparent; 
 }
 
-/* For Chrome, Edge, Safari */
 .ud-right-widgets::-webkit-scrollbar {
-  width: 6px; /* Scrollbar width */
+  width: 2px; 
 }
 
 .ud-right-widgets::-webkit-scrollbar-track {
-  background: transparent; /* Track background */
+  background: transparent; 
 }
 
 .ud-right-widgets::-webkit-scrollbar-thumb {
-  background-color: var(--color-muted); /* Thumb color */
+  background-color: var(--color-muted); 
   border-radius: 3px;
 }
 

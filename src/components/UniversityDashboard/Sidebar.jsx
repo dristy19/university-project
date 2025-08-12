@@ -1,4 +1,3 @@
-// src/components/UniversityDashboard/Sidebar.jsx
 import React from "react";
 import {
   FaHome,

@@ -1,4 +1,3 @@
-// src/components/UniversityDashboard/MainView.jsx
 import React from "react";
 import WelcomeBanner from "./WelcomeBanner";
 import PendingTasks from "./PendingTasks";
@@ -10,8 +9,9 @@ import ProfileForm from "./ProfileForm";
 import Courses from "./Courses";
 import Documents from "./Documents";
 import AnalyticsDashboard from "./AnalyticsDashboard";
+import Subscription from "./Subscription";
 import Settings from "./Settings";
-import "./MainView.css"; // Assuming you have a CSS file for styling
+import "./MainView.css"; 
 
 export default function MainView({ route }) {
   switch (route) {
@@ -62,13 +62,7 @@ case "profile":
       );
     case "subscription":
       return (
-        <div className="ud-page">
-          <h2>Subscription Plan</h2>
-          <p>View current plan and upgrade/renew.</p>
-          <section className="ud-card">
-            <button className="ud-btn">Manage Plan</button>
-          </section>
-        </div>
+          <Subscription/>
       );
     case "settings":
       return (

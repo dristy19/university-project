@@ -1,5 +1,5 @@
 import React from "react";
-import "./StatsCards.css"; // Assuming you have a CSS file for styling
+import "./StatsCards.css"; 
 export default function StatsCards() {
   const stats = [
     { label: "Profile Views", value: "1.2K" },

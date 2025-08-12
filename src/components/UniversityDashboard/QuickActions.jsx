@@ -1,6 +1,5 @@
-// src/components/UniversityDashboard/QuickActions.jsx
 import React from "react";
-import "./QuickActions.css"; // Assuming you have a CSS file for styling
+import "./QuickActions.css";
 export default function QuickActions() {
   const actions = [
     { id: "add-course", label: "Add Course" },
