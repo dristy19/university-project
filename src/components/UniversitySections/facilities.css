@@ -13,7 +13,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem;
-  width: 90%;
+  width: 100%;
   justify-content: center;
   align-items: stretch; /* Makes all cards in a row the same height */
 }
@@ -29,8 +29,8 @@
 .facilities-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-  width: 50%;
+  gap: 2rem;
+  width: 70%;
   justify-content: center;
 }
 
@@ -42,7 +42,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%; /* Makes them match tallest card in row */
+  height: 110%; 
 }
 
 .facility-header {
@@ -60,13 +60,13 @@
 .facility-title {
   font-size: 0.875rem;
   font-weight: 600;
-  margin-left: 0.5rem;
+  margin: 0 50px;
 }
 
 .facility-description {
   font-size: 0.75rem;
-  margin-bottom: 0.25rem;
   line-height: 1.2;
+  margin-top: 12px;
 }
 
 .reviews {
@@ -76,10 +76,11 @@
 .reviews ul {
   list-style: none;
   padding: 0;
+  margin-top: 10px;
 }
 
 .reviews li {
-  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
 }
 .add-review {
   margin-top: auto; /* Sticks button to bottom */
@@ -96,7 +97,7 @@
   font-size: 0.75rem;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 100%; /* Full width button */
+  width: 50%; /* Full width button */
 }
 
 .review-button:hover {

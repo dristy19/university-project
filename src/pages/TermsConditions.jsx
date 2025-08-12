@@ -12,10 +12,10 @@ import {
   faArrowRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
 import { applyTheme } from '../utils/themeUtils';
-import './UniversityPage.css'; // Retain existing CSS for navbar
 import Footer from '../components/Footer';
+import './UniversityPage.css'; // Assuming the same CSS for navbar styling
 
-const PrivacyPolicy = () => {
+const TermsAndConditions = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState(null);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -35,8 +35,8 @@ const PrivacyPolicy = () => {
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--background-color)', color: 'var(--text-color)' }}>
-      {/* Navbar (Unchanged) */}
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--background-color)', color: 'var(--text-color)' }}>
+      {/* Navbar (Unchanged from PrivacyPolicy.jsx) */}
       <nav className="shadow-md">
         <div className="flex items-center">
           <img
@@ -76,6 +76,14 @@ const PrivacyPolicy = () => {
             }`}
           >
             Privacy Policy
+          </Link>
+          <Link
+            to="/terms-and-conditions"
+            className={`bg-[var(--button-primary)] text-white hover:bg-[var(--button-hover)] px-4 py-2 rounded ${
+              location.pathname === '/terms-and-conditions' ? 'bg-[var(--button-hover)]' : ''
+            }`}
+          >
+            Terms & Conditions
           </Link>
           <div className="dropdown" ref={dropdownRef}>
             <button
@@ -124,11 +132,11 @@ const PrivacyPolicy = () => {
         </div>
       </nav>
 
-      {/* Enhanced Privacy Policy Content */}
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
+      {/* Terms and Conditions Content */}
+      <div className="container mx-auto px-4 py-12 max-w-4xl flex-1">
         <header className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
-            Privacy Policy
+            Terms & Conditions
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300">
             Last updated: August 08, 2025
@@ -138,70 +146,65 @@ const PrivacyPolicy = () => {
         <div className="space-y-8">
           {[
             {
-              title: "Our Privacy Policy",
-              content: "We are committed to protecting your privacy and ensuring that your personal information is handled in a safe and responsible manner. This Privacy Policy outlines how we collect, use, store, and protect your personal information when you use our services, website, or applications."
-            },
-            {
-              title: "The Types of Personal Information That We Collect and Hold",
-              content: "We may collect and hold personal information such as your name, email address, phone number, billing information, and other details you provide when interacting with our services. This information is collected to provide and improve our services, process transactions, and communicate with you."
-            },
-            {
-              title: "Registration",
-              content: "When you register for an account on our platform, we collect information such as your name, email address, and password. This information is used to create and manage your account, verify your identity, and provide personalized services."
-            },
-            {
-              title: "Application Form",
-              content: "If you submit an application form for any of our services, we may collect additional information such as your address, date of birth, or other relevant details. This information is used to process your application and ensure eligibility for our services."
-            },
-            {
-              title: "Log Files",
-              content: "Like most websites, we use log files to collect information about how our services are used. This includes data such as your browser type, operating system, referring URLs, pages visited, and the date and time of your visit. Log files help us analyze trends and improve our platform."
-            },
-            {
-              title: "IP Addresses and Information About Your Computer and Mobile Device",
-              content: "We may collect your IP address and information about your computer or mobile device, such as device type, operating system, and browser version. This information helps us ensure the security of our platform and optimize your user experience."
-            },
-            {
-              title: "Use of Your Personal Information",
-              content: "Your personal information is used to provide and improve our services, process transactions, communicate with you, and comply with legal obligations. We may also use your information to send you updates, newsletters, or promotional materials, provided you have given consent where required."
-            },
-            {
-              title: "Sharing of Your Information",
-              content: "We do not sell or rent your personal information to third parties. We may share your information with trusted service providers who assist us in operating our platform, provided they agree to keep your information confidential. We may also share information to comply with legal requirements or protect our rights."
+              title: "Terms & Conditions",
+              content: "By accessing or using the Uni Hub platform, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use our services. These terms govern your use of our website, applications, and related services."
             },
             {
               title: "Cookies",
-              content: "We use cookies and similar technologies to enhance your experience on our platform. Cookies help us remember your preferences, analyze site usage, and deliver personalized content. You can manage your cookie preferences through your browser settings."
+              content: "We use cookies and similar technologies to enhance your experience, analyze site usage, and deliver personalized content. By using our platform, you consent to our use of cookies as described in our Privacy Policy. You can manage cookie preferences through your browser settings."
             },
             {
-              title: "Advertising",
-              content: "We may use third-party advertising services to display ads on our platform. These services may use cookies or other tracking technologies to serve relevant advertisements based on your interests. You can opt out of targeted advertising through your browser or third-party tools."
+              title: "License",
+              content: "Unless otherwise stated, Uni Hub and/or its licensors own the intellectual property rights for all material on the platform. You are granted a limited, non-exclusive, non-transferable license to access and use the platform for personal, non-commercial purposes, subject to these terms."
             },
             {
-              title: "Links to Other Platforms",
-              content: "Our platform may contain links to third-party websites or services. We are not responsible for the privacy practices or content of these platforms. We encourage you to review the privacy policies of any third-party sites you visit."
+              title: "You Must Not",
+              content: (
+                <>
+                  You are prohibited from:
+                  <ul className="list-disc pl-5 mt-2 space-y-1">
+                    <li>Using the platform in any way that violates applicable laws or regulations.</li>
+                    <li>Reproducing, duplicating, or reselling any part of our platform without permission.</li>
+                    <li>Engaging in unauthorized data collection, such as scraping or harvesting user information.</li>
+                    <li>Attempting to interfere with the platform’s functionality, including through hacking or introducing malware.</li>
+                    <li>Using the platform to transmit unlawful or harmful content.</li>
+                  </ul>
+                </>
+              )
             },
             {
-              title: "Your Obligations",
-              content: "You are responsible for providing accurate and up-to-date information when using our services. You must also comply with our terms of service and applicable laws. Failure to do so may result in the suspension or termination of your account."
+              title: "User Comments",
+              content: "Certain parts of our platform allow users to post comments, reviews, or other content. You are responsible for ensuring your comments are lawful, non-infringing, and comply with our guidelines. We reserve the right to moderate, edit, or remove user comments at our discretion."
             },
             {
-              title: "Cancellation and Refund Policy",
-              content: "If you wish to cancel your subscription or request a refund, please contact us at the details provided below. Refunds are subject to our terms and conditions, and eligibility will be determined on a case-by-case basis."
+              title: "Hyperlinking to Our Content",
+              content: "You may link to our platform provided it is done in a fair and legal manner, does not damage our reputation, and does not suggest any unauthorized association or endorsement. Links must not be placed on sites that contain unlawful or objectionable content."
             },
             {
-              title: "Changes to Our Privacy Policy",
-              content: "We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any significant changes by posting the updated policy on our platform or through other communication channels."
+              title: "iFrames",
+              content: "You may not create frames around our webpages or use techniques that alter the visual presentation or appearance of our platform without prior written consent from Uni Hub."
             },
             {
-              title: "User Communications",
-              content: "We may communicate with you via email, in-app notifications, or other methods to provide updates about your account, services, or promotions. You can manage your communication preferences in your account settings."
+              title: "Content Liability",
+              content: "We are not liable for any content posted by users or third parties on our platform. While we strive to ensure accuracy, we do not guarantee the completeness or reliability of information provided. You use the platform at your own risk."
+            },
+            {
+              title: "Reservation of Rights",
+              content: "We reserve the right to modify, suspend, or terminate any part of our platform or services at any time without notice. We also reserve the right to update these Terms and Conditions, with changes effective upon posting on our platform."
+            },
+            {
+              title: "Removal of Links from Our Website",
+              content: "We may request the removal of links to our platform if they are deemed inappropriate or harmful. If you link to our platform, you agree to remove such links promptly upon our request."
+            },
+            {
+              title: "Disclaimer",
+              content: "The Uni Hub platform is provided 'as is' without warranties of any kind, express or implied. We do not guarantee uninterrupted access, error-free operation, or the absence of viruses. To the fullest extent permitted by law, we disclaim liability for any damages arising from your use of the platform."
             },
             {
               title: "How to Contact Us",
               content: (
                 <>
-                  If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
+                  If you have any questions or concerns about these Terms and Conditions, please contact us at:
                   <br />
                   <strong>Email:</strong> support@example.com
                   <br />
@@ -219,16 +222,18 @@ const PrivacyPolicy = () => {
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
                 {section.title}
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+              <div className="text-gray-600 dark:text-gray-300 leading-relaxed">
                 {section.content}
-              </p>
+              </div>
             </section>
           ))}
         </div>
       </div>
+
+      {/* Footer */}
       <Footer />
     </div>
   );
 };
 
-export default PrivacyPolicy;
+export default TermsAndConditions;
