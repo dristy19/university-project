@@ -1,6 +1,5 @@
-// src/components/UniversityDashboard/ApplicationBoard.jsx
 import React from "react";
-import "./ApplicationBoard.css"; // Assuming you have a CSS file for styling
+import "./ApplicationBoard.css"; 
 export default function ApplicationBoard() {
   const statuses = ["New", "Review", "Shortlisted", "Accepted", "Rejected"];
   const exampleApps = [

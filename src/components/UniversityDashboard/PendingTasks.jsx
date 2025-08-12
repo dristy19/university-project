@@ -1,4 +1,3 @@
-// src/components/UniversityDashboard/PendingTasks.jsx
 import React from "react";
 import "./PendingTasks.css";
 
