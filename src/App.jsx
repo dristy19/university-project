@@ -14,6 +14,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import UniversityPage from './pages/UniversityPage';
 import UniversityDashboard from './dashboard/UniversityDashboard';
+import AgentDashboard from './AgentDashboard/Agent';
+
 
 const App = () => {
   return (
@@ -30,6 +32,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/university-page" element={<UniversityPage />} />
           <Route path="/university-dashboard" element={<UniversityDashboard />} />
+          <Route path="/agent-dashboard" element={<AgentDashboard />} />
 
           {/* Optional: 404 Page */}
           <Route path="*" element={<div className="p-6 text-center text-red-600">Page Not Found</div>} />
