@@ -1,0 +1,49 @@
+/* variables.css */
+
+/* Light Theme */
+:root {
+  --background-color: #F9FAFB;
+  --text-color: #1E293B;
+  --text-color-secondary: #555;
+  --border-color: #9CA3AF;
+  --divider-color: #E2E8F0;
+  --navbar-bg: linear-gradient(to right, #F9FAFB, #1D4ED8);
+  --button-primary: #1D4ED8;
+  --button-accent: #FBBF24;
+  --button-hover: #2563EB;
+  --input-border: #9CA3AF;
+  --input-text: #1E293B;
+  --dropdown-bg: #FFFFFF;
+  --dropdown-text: #1E293B;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --background-color: #1E293B;
+  --text-color: #FFFFFF;
+  --text-color-secondary: #B0B9C6;
+  --border-color: #D1D5DB;
+  --divider-color: #374563;
+  --navbar-bg: linear-gradient(to right, #1E293B, #1D4ED8);
+  --button-primary: #1D4ED8;
+  --button-accent: #FBBF24;
+  --button-hover: #60A5FA;
+  --input-border: #D1D5DB;
+  --input-text: #000000;
+  --dropdown-bg: #2D3748;
+  --dropdown-text: #FFFFFF;
+}
+
+/* Smooth transitions for theme changes */
+body, nav, input, select, button, hr, .info-divider {
+  transition: 
+    background-color 0.3s ease, 
+    color 0.3s ease, 
+    border-color 0.3s ease;
+}
+
+/* Apply variables globally */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}

@@ -11,7 +11,6 @@ import {
   faUserPlus,
   faArrowRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
-import { applyTheme } from '../utils/themeUtils';
 import './UniversityPage.css'; // Retain existing CSS for navbar
 import Footer from '../components/Footer';
 

@@ -715,7 +715,7 @@ const AddStudentPopup = ({
               )}
 
               {/* -------- Step 4 -------- */}
-              {step === 4 && (
+             {step === 4 && (
                 <div className="form-section">
                   <div className='univeristy-title'>{formData.university && <span>- {formData.university}</span>}</div>
                   <h2 className="form-section-title">

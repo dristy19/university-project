@@ -56,7 +56,7 @@ export default function Subscription() {
         <div className="subscription-card additional-license card">
           <div className="license-header">
             <div className="license-icon" aria-hidden>
-              {/* simple shop / license SVG */}
+              
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                 <path d="M3 7h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" fill="#EEF2FF"/>
                 <path d="M7 7V5a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v2" stroke="#5B7CFF" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -113,22 +113,22 @@ export default function Subscription() {
         <div className="billing-details">
           <div className="billing-item">
             <label>Corporate Name</label>
-            <p>Ikas Limited</p>
+            <p>XYZ</p>
           </div>
 
           <div className="billing-item">
             <label>Address</label>
-            <p>Koru Mahallesi, No:4, North Star I...</p>
+            <p>, No:4, I...</p>
           </div>
 
           <div className="billing-item">
             <label>Tax Department</label>
-            <p>Kavakli Dere</p>
+            <p>ABCD</p>
           </div>
 
           <div className="billing-item">
             <label>Tax ID</label>
-            <p>3294829123</p>
+            <p>32948291000</p>
           </div>
         </div>
 

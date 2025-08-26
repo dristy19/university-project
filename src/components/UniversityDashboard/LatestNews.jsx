@@ -93,6 +93,7 @@ export default function LatestNews() {
     },
   ];
 
+  
   const groupedNews = news.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
@@ -101,6 +102,7 @@ export default function LatestNews() {
     return acc;
   }, {});
 
+ 
   const handleEdit = (id) => {
     alert(`Edit news item with ID: ${id} (placeholder)`);
   };

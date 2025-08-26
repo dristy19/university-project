@@ -1,6 +1,4 @@
-/* =========================
-   SIDEBAR CONTAINER
-========================= */
+
 .aside-container {
   background-color: var(--dropdown-bg);
   border: 1px solid var(--border-color);
@@ -9,7 +7,7 @@
   min-width: 220px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   color: var(--text-color);
-  margin: 0 auto; /* Center the sidebar */
+  margin: 0 auto;
 }
 
 @media (max-width: 1024px) {
@@ -19,9 +17,7 @@
   }
 }
 
-/* =========================
-   TITLE
-========================= */
+/*  TITLE*/
 .aside-title {
   font-size: 1.1rem;
   font-weight: bold;
@@ -30,9 +26,7 @@
   text-align: center;
 }
 
-/* =========================
-   TABLE STYLES
-========================= */
+/* TABLE STYLES */
 .aside-table {
   width: 100%;
   border-collapse: collapse;
@@ -51,9 +45,7 @@
   background-color: rgba(0, 0, 0, 0.03);
 }
 
-/* =========================
-   LOGO & TEXT
-========================= */
+
 .aside-logo-cell {
   width: 45px;
   padding: 0.3rem;

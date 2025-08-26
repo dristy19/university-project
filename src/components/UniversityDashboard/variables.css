@@ -1,16 +1,17 @@
+
 :root {
   --color-bg-light: #f9fafb;
   --color-bg-dark: #1e293b;
   --color-text-light: #111827;
   --color-text-dark: #f3f4f6;
-  --color-primary: #3b82f6;
-  --color-primary-dark: #2563eb;
-  --color-muted: #6b7280;
+  --color-primary: #3b82f6; /* blue-500 */
+  --color-primary-dark: #2563eb; /* blue-600 */
+  --color-muted: #6b7280; /* gray-500 */
   --color-card-bg-light: #ffffff;
   --color-card-bg-dark: #334155;
   --color-border-light: #e5e7eb;
   --color-border-dark: #475569;
-  --color-accent: #fbbf24;
+  --color-accent: #fbbf24; /* yellow-400 */
 }
 
 [data-theme="light"] {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./ProfileForm.css"; 
+import "./ProfileForm.css";
+
 const universityTypes = ['Government', 'Private', 'Deemed', 'Central', 'State'];
 const affiliations = ['UGC', 'AICTE', 'NAAC', 'ICAR', 'BCI', 'MCI', 'Others'];
 const states = [

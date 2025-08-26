@@ -29,7 +29,7 @@
   border: 1px solid var(--border-color,#e5e7eb);
   border-radius: 12px; padding: 1.5rem;
 }
-.form-section-title { font-size: 16px; font-weight: 500; color: var(--text-color,#111827); margin: 0 0 1rem 0; }
+.form-section-title { font-size: 1.05rem; font-weight: 800; color: var(--text-color,#111827); margin: 0 0 1rem 0; }
 .form-subtitle { font-weight: 700; color: var(--text-color,#111827); margin-bottom: .5rem; }
 .muted { color: var(--muted-text,#6b7280); font-weight: 500; }
 
@@ -141,10 +141,7 @@ textarea.input { resize: vertical; min-height: 80px; }
 }
 .checkbox-row { display: flex; gap: .6rem; align-items: center; }
 
-.univeristy-title{
-  font-weight: bold;
-  font-size:1.2rem
-}
+
 .file-chip {
   display: flex;
   align-items: center;
@@ -199,3 +196,7 @@ textarea.input { resize: vertical; min-height: 80px; }
   margin-left: 8px;
 }
 
+.univeristy-title{
+  font-weight: bold;
+  font-size:1.2rem
+}

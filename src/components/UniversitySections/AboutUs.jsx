@@ -14,11 +14,11 @@ const AboutUs = () => {
     document.documentElement.classList.toggle('dark', isDark);
   };
 
-  // Image carousel state and data
+  // Image state and data
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
     'https://i.pinimg.com/736x/93/85/5b/93855bc9e97f4ec0f5df5f12b48169b5.jpg',
-    'https://i.pinimg.com/736x/93/85/5b/93855bc9e97f4ec0f5df5f12b48169b5.jpg', // Duplicate for demo, replace with other images as needed
+    'https://i.pinimg.com/736x/93/85/5b/93855bc9e97f4ec0f5df5f12b48169b5.jpg', 
     'https://i.pinimg.com/736x/93/85/5b/93855bc9e97f4ec0f5df5f12b48169b5.jpg',
   ];
 
@@ -36,6 +36,12 @@ const AboutUs = () => {
         <p className="about-us-description">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
         </p>
+        <button
+          onClick={toggleTheme}
+          className="theme-toggle-button"
+        >
+          {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        </button>
       </div>
       <div className="about-us-image">
         <div className="image-carousel">
